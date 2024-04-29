@@ -50,6 +50,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_inset_box_shadow",
+      "rootUri": "file:///C:/Users/igh04/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_inset_box_shadow-1.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///C:/Users/igh04/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-3.0.2",
       "packageUri": "lib/",
@@ -170,7 +176,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-03-31T15:09:38.761527Z",
+  "generated": "2024-04-01T00:33:23.052305Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }
