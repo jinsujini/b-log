@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_blog/page/appbar.dart';
 import 'package:flutter_application_blog/page/login.dart';
 
 void main() {
@@ -10,7 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: login(),
+      home: Scaffold(
+        body: login(),
+      ),
     );
   }
 }
