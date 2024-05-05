@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_blog/index.dart';
+import 'package:flutter_application_blog/page/myBookLog/BookLogDetails.dart';
 
 /// 첫 번째 페이지
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  const MainPage({super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -24,7 +23,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
 
-    Timer.periodic(Duration(seconds: 4), (timer) {
+    Timer.periodic(const Duration(seconds: 4), (timer) {
       int currentPage = controller.page!.toInt(); //현재 화면
       int nextPage = currentPage + 1; // 다음 화면
 
@@ -33,7 +32,7 @@ class _MainPageState extends State<MainPage> {
         nextPage = 0;
       }
       controller.animateToPage(nextPage, // 다음페이지로 넘겨.
-          duration: Duration(milliseconds: 400), // 이동하는 속도
+          duration: const Duration(milliseconds: 400), // 이동하는 속도
           curve: Curves.linear // 동일한 속도
           );
     });
@@ -43,14 +42,14 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backColor,
-      body: Container(
+      body: SizedBox(
           width: double.infinity,
           height: double.infinity,
           child: SingleChildScrollView(
             child: Center(
               child: Column(
                 children: [
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(0.0),
                     child: SearchBar(
                       trailing: [
@@ -84,81 +83,89 @@ class _MainPageState extends State<MainPage> {
                           ]),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: 360,
                     height: 20,
-                    child: Text(
+                    child: const Text(
                       "friend’s new-log",
                       style: TextStyle(fontSize: 14, color: Colors.black),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Container(
-                        width: 400,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 30.0),
-                          child: Padding(
-                            padding: const EdgeInsets.all(30.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset('assets/Vector.png',
-                                    fit: BoxFit.fill),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 8),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text("yeonii"),
-                                      Text(
-                                        "2024.3.2",
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                      Text(
-                                        "제목",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                      Text(
-                                        "작가",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                      Text(
-                                        "내용 미리보기블라\n블라브라",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 20),
-                                  child: Container(
-                                    width: 100,
-                                    height: 150,
-                                    child: Image.asset('assets/city.jpeg',
-                                        fit: BoxFit.cover),
-                                  ),
-                                )
-                              ],
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Booklogdetails()));
+                      },
+                      child: Container(
+                          width: 400,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
                             ),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
                           ),
-                        )),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image.asset('assets/Vector.png',
+                                      fit: BoxFit.fill),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("yeonii"),
+                                        Text(
+                                          "2024.3.2",
+                                          style: TextStyle(fontSize: 10),
+                                        ),
+                                        Text(
+                                          "제목",
+                                          style: TextStyle(fontSize: 13),
+                                        ),
+                                        Text(
+                                          "작가",
+                                          style: TextStyle(fontSize: 13),
+                                        ),
+                                        Text(
+                                          "내용 미리보기블라\n블라브라",
+                                          style: TextStyle(fontSize: 13),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: SizedBox(
+                                      width: 100,
+                                      height: 150,
+                                      child: Image.asset('assets/city.jpeg',
+                                          fit: BoxFit.cover),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: Container(
+                    child: SizedBox(
                       width: 370,
                       height: 50,
-                      child: Text(
+                      child: const Text(
                         "your contributions in March",
                         style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
@@ -176,12 +183,12 @@ class _MainPageState extends State<MainPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Container(
+                      child: SizedBox(
                         width: 200,
                         height: 200,
                         child: GridView(
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 7,
                                   mainAxisSpacing: 3,
                                   crossAxisSpacing: 3),
@@ -190,7 +197,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "mon",
                                 textAlign: TextAlign.center,
                               ),
@@ -199,7 +206,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "tue",
                                 textAlign: TextAlign.center,
                               ),
@@ -208,7 +215,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "wed",
                                 textAlign: TextAlign.center,
                               ),
@@ -217,7 +224,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "thu",
                                 textAlign: TextAlign.center,
                               ),
@@ -226,7 +233,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "fry",
                                 textAlign: TextAlign.center,
                               ),
@@ -235,7 +242,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "sta",
                                 textAlign: TextAlign.center,
                               ),
@@ -244,7 +251,7 @@ class _MainPageState extends State<MainPage> {
                               width: 100,
                               height: 100,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 "sun",
                                 textAlign: TextAlign.center,
                               ),
@@ -278,7 +285,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(96, 142, 142, 1.0),
+                                  color:
+                                      const Color.fromRGBO(96, 142, 142, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -286,7 +294,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(68, 102, 102, 1.0),
+                                  color:
+                                      const Color.fromRGBO(68, 102, 102, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -294,7 +303,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -302,7 +312,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -310,7 +321,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -318,7 +330,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -326,7 +339,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -334,7 +348,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(181, 221, 221, 1.0),
+                                  color:
+                                      const Color.fromRGBO(181, 221, 221, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -342,7 +357,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(114, 185, 185, 1.0),
+                                  color:
+                                      const Color.fromRGBO(114, 185, 185, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -350,7 +366,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -358,7 +375,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -366,7 +384,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -374,7 +393,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -382,7 +402,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -390,7 +411,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -398,7 +420,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -406,7 +429,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -414,7 +438,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -422,7 +447,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -430,7 +456,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -438,7 +465,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -446,7 +474,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -454,7 +483,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -462,7 +492,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -470,7 +501,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -478,7 +510,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -486,7 +519,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -494,7 +528,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -502,7 +537,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -510,7 +546,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
@@ -518,7 +555,8 @@ class _MainPageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: BoxDecoration(
-                                  color: Color.fromRGBO(215, 223, 223, 1.0),
+                                  color:
+                                      const Color.fromRGBO(215, 223, 223, 1.0),
                                   borderRadius:
                                       BorderRadius.circular(10), // 둥근 테두리 설정
                                 )),
