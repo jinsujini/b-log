@@ -114,6 +114,7 @@ class _FriendsState extends State<Friends> {
                                 },
                                 trailing: [
                                   IconButton(
+                                    color: Color.fromARGB(255, 26, 73, 93),
                                     icon: const Icon(Icons.search_outlined),
                                     onPressed: () {
                                       print('친구찾기');

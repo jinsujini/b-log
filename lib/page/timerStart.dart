@@ -12,6 +12,36 @@ class TimerStart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 책 선택 여부
+    bool isBookSelected = false;
+    // 선택된 책 제목
+    String selectedBookTitle = '';
+    // 책을 선택하면 실행되는 함수
+    void selectBook(String title) {
+      selectedBookTitle = title;
+      isBookSelected = true;
+    }
+
+    // 책을 선택하지 않았을 때 나타나는 알림
+    void selectBookAlert(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("책을 선택하세요"),
+            content: Text("시작하기 전에 책을 선택해주세요."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("확인"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
     return Scaffold(
       body: Container(
         color: Color(0xffFEFCEB),
@@ -50,43 +80,55 @@ class TimerStart extends StatelessWidget {
                 children: [
                   // 책 검색
                   Container(
-                    margin: EdgeInsets.only(top: 30),
-                    width: 310,
-                    height: 43,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: "책 제목을 검색하세요",
-                          labelStyle: TextStyle(fontSize: 13),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                                color: Color.fromARGB(255, 124, 124, 124)),
-                          ),
-
-                          //돋보기 아이콘
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              print("돋보기 아이콘 클릭");
-                            },
-                            icon: SizedBox(
-                              height: 30,
-                              width: 30,
-                              child: Icon(
-                                color: Color.fromARGB(255, 124, 124, 124),
-                                Icons.search_outlined,
-                              ),
-                            ),
-                          ),
-                        ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromRGBO(124, 124, 124, 1),
                       ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    margin: EdgeInsets.only(top: 40),
+                    width: 310,
+                    height: 30,
+                    child: !isBookSelected ? SearchBar(
+                      constraints:
+                          BoxConstraints.expand(width: 360, height: 32),
+                      elevation: MaterialStateProperty.all(0),
+                      hintText: '책 제목을 검색하세요',
+                      // 책 검색 후 선택되었을 때 호출되는 콜백 함수
+                      onBookSelected: selectBook,
+                      trailing: [
+                        IconButton(
+                          color: Color.fromRGBO(124, 124, 124, 1),
+                          icon: const Icon(Icons.search_outlined),
+                          onPressed: () {
+                            print('책 검색');
+                          },
+                        ),
+                        : Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(padding: EdgeInsets.only(left: 20),child: Text(selectedBookTitle,style: TextStyle(fontsize: 16, fontWeight: FontWeight.bold),),)
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 20), // 위젯 사이 여백
                   // 스톱워치
                   TimerScreen(),
                 ],
+              ),
+            ),
+            // 시작 버튼
+            Container(
+              margin: EdgeInsets.only(top: 20),
+              child: ElevatedButton(
+                onPressed: () {
+                  // 책을 선택하지 않았을 때 알림 표시
+                  if (!isBookSelected) {
+                    selectBookAlert(context);
+                  }
+                },
+                child: Text("시작"),
               ),
             ),
           ],
