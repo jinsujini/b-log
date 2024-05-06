@@ -7,41 +7,42 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_blog/page/timerMain.dart';
 
+// 책 제목이 입력됐는지
+bool isBookSelected = false;
+// 선택된 책 제목
+String selectedBookTitle = '';
+// 책을 선택하면 실행되는 함수
+void selectBook(String title) {
+  selectedBookTitle = title;
+  isBookSelected = true;
+}
+
+// 책을 선택하지 않았을 때 나타나는 알림
+void selectBookAlert(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("책 제목을 입력하세요"),
+        content: Text("시작하기 전에 책 제목을 입력해주세요."),
+        actions: <Widget>[
+          TextButton(
+            child: Text("확인"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class TimerStart extends StatelessWidget {
   const TimerStart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // 책 선택 여부
-    bool isBookSelected = false;
-    // 선택된 책 제목
-    String selectedBookTitle = '';
-    // 책을 선택하면 실행되는 함수
-    void selectBook(String title) {
-      selectedBookTitle = title;
-      isBookSelected = true;
-    }
-
-    // 책을 선택하지 않았을 때 나타나는 알림
-    void selectBookAlert(BuildContext context) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("책을 선택하세요"),
-            content: Text("시작하기 전에 책을 선택해주세요."),
-            actions: <Widget>[
-              TextButton(
-                child: Text("확인"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
     return Scaffold(
       body: Container(
         color: Color(0xffFEFCEB),
@@ -54,7 +55,7 @@ class TimerStart extends StatelessWidget {
             Container(
               width: double.infinity,
               height: 30,
-              margin: EdgeInsets.only(left: 35, top: 130),
+              margin: EdgeInsets.only(left: 35, top: 30),
               child: Text(
                 "타이머",
                 style: TextStyle(
@@ -78,57 +79,31 @@ class TimerStart extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // 책 검색
+                  // 책 제목 입력
                   Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Color.fromRGBO(124, 124, 124, 1),
-                      ),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    margin: EdgeInsets.only(top: 40),
                     width: 310,
                     height: 30,
-                    child: !isBookSelected ? SearchBar(
-                      constraints:
-                          BoxConstraints.expand(width: 360, height: 32),
-                      elevation: MaterialStateProperty.all(0),
-                      hintText: '책 제목을 검색하세요',
-                      // 책 검색 후 선택되었을 때 호출되는 콜백 함수
-                      onBookSelected: selectBook,
-                      trailing: [
-                        IconButton(
-                          color: Color.fromRGBO(124, 124, 124, 1),
-                          icon: const Icon(Icons.search_outlined),
-                          onPressed: () {
-                            print('책 검색');
-                          },
-                        ),
-                        : Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(padding: EdgeInsets.only(left: 20),child: Text(selectedBookTitle,style: TextStyle(fontsize: 16, fontWeight: FontWeight.bold),),)
-                        ),
-                      ],
+                    margin: EdgeInsets.only(top: 40),
+                    child: TextField(
+                      textAlign: TextAlign.center, // 텍스트 정렬을 가운데로 설정합니다.
+                      onSubmitted: (value) {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        selectBook(value);
+                      },
+                      onChanged: (value) {
+                        selectedBookTitle = value;
+                        isBookSelected = true;
+                      },
+                      decoration: InputDecoration(
+                        hintText: '책 제목을 입력하세요',
+                        border: InputBorder.none, // 밑줄 제거
+                      ),
                     ),
                   ),
                   SizedBox(height: 20), // 위젯 사이 여백
                   // 스톱워치
                   TimerScreen(),
                 ],
-              ),
-            ),
-            // 시작 버튼
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: ElevatedButton(
-                onPressed: () {
-                  // 책을 선택하지 않았을 때 알림 표시
-                  if (!isBookSelected) {
-                    selectBookAlert(context);
-                  }
-                },
-                child: Text("시작"),
               ),
             ),
           ],
@@ -181,32 +156,37 @@ class _TimerScreenState extends State<TimerScreen> {
               if (!shouldShowButtons())
                 ElevatedButton(
                   onPressed: () {
-                    if (isRun) {
-                      // 타이머 실행 중일 때
-                      setState(() {
-                        isRun = false;
-                        timer.cancel();
-                      });
-                    } else {
-                      setState(() {
-                        // 타이머가 멈춰 있을 때 start 버튼 누르면 타이머 작동함
-                        isRun = true;
-                        timer = Timer.periodic(Duration(seconds: 1), (timer) {
-                          setState(() {
-                            if (seconds == 59) {
-                              seconds = 0;
-                              if (minutes == 59) {
-                                minutes = 0;
-                                hours++;
+                    if (isBookSelected) {
+                      if (isRun) {
+                        // 타이머 실행 중일 때
+                        setState(() {
+                          isRun = false;
+                          timer.cancel();
+                        });
+                      } else {
+                        setState(() {
+                          // 타이머가 멈춰 있을 때 start 버튼 누르면 타이머 작동함
+                          isRun = true;
+                          timer = Timer.periodic(Duration(seconds: 1), (timer) {
+                            setState(() {
+                              if (seconds == 59) {
+                                seconds = 0;
+                                if (minutes == 59) {
+                                  minutes = 0;
+                                  hours++;
+                                } else {
+                                  minutes++;
+                                }
                               } else {
-                                minutes++;
+                                seconds++;
                               }
-                            } else {
-                              seconds++;
-                            }
+                            });
                           });
                         });
-                      });
+                      }
+                    } else {
+                      // 책이 선택되지 않았을 때 알림을 표시합니다.
+                      selectBookAlert(context);
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -233,7 +213,10 @@ class _TimerScreenState extends State<TimerScreen> {
                         await SharedPreferences.getInstance();
                     await prefs.setString('savedTime', formattedTime);
                     //이전 화면으로 돌아가기
-                    Navigator.pop(context, formattedTime);
+                    Navigator.pop(context, {
+                      'time': formattedTime,
+                      'bookTitle': selectedBookTitle,
+                    });
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.black,
