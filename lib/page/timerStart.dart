@@ -34,6 +34,37 @@ void selectBookAlert(BuildContext context) {
   );
 }
 
+// 책 제목이 입력됐는지
+bool isBookSelected = false;
+// 선택된 책 제목
+String selectedBookTitle = '';
+// 책을 선택하면 실행되는 함수
+void selectBook(String title) {
+  selectedBookTitle = title;
+  isBookSelected = true;
+}
+
+// 책을 선택하지 않았을 때 나타나는 알림
+void selectBookAlert(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("책 제목을 입력하세요"),
+        content: Text("시작하기 전에 책 제목을 입력해주세요."),
+        actions: <Widget>[
+          TextButton(
+            child: Text("확인"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class TimerStart extends StatelessWidget {
   const TimerStart({super.key});
 

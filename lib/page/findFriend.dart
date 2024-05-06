@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_application_blog/page/friendBoolLog.dart';
+
+import 'package:flutter_application_blog/page/friendBookLog.dart';
 
 class Friend {
   final String name;
@@ -111,7 +114,11 @@ class _FriendsState extends State<Friends> {
                                   width: 360,
                                   height: 32,
                                 ),
+
                                 elevation: WidgetStateProperty.all(0),
+
+                                elevation: MaterialStateProperty.all(0),
+
                                 hintText: '친구를 찾아보세요',
                                 onChanged: (value) {
                                   setState(() {
