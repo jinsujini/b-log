@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
-import 'package:flutter_application_blog/page/create_account.dart';
+import 'package:flutter_application_blog/page/login/create_account.dart';
 
 class login extends StatelessWidget {
   const login({super.key});
@@ -9,7 +9,7 @@ class login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-      color: Color(0xffFEFCEB),
+      color: const Color(0xffFEFCEB),
       width: double.infinity,
       height: double.infinity,
       child: Column(
@@ -17,7 +17,7 @@ class login extends StatelessWidget {
           Container(
             width: 150,
             height: 150,
-            margin: EdgeInsets.only(top: 45, bottom: 20),
+            margin: const EdgeInsets.only(top: 45, bottom: 20),
             child: Image.asset("logo.png"),
           ),
           Container(
@@ -26,7 +26,7 @@ class login extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                border: Border.all(width: 0.5, color: Color(0xff1A495D))),
+                border: Border.all(width: 0.5, color: const Color(0xff1A495D))),
             child: Column(
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -34,23 +34,24 @@ class login extends StatelessWidget {
                     width: 40,
                     height: 30,
                     decoration: BoxDecoration(
-                        color: Color(0xffECF6F6),
+                        color: const Color(0xffECF6F6),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xffB5DDDD))),
-                    margin: EdgeInsets.only(top: 30),
-                    child: Text('ID',
+                        border: Border.all(color: const Color(0xffB5DDDD))),
+                    margin: const EdgeInsets.only(top: 30),
+                    child: const Text('ID',
                         style: TextStyle(fontSize: 22),
                         textAlign: TextAlign.center),
                   ),
                   Container(
                     width: 250,
                     height: 30,
-                    margin: EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Color(0xffB5DDDD)),
+                      border:
+                          Border.all(width: 2, color: const Color(0xffB5DDDD)),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: " ",
@@ -63,23 +64,24 @@ class login extends StatelessWidget {
                     width: 120,
                     height: 30,
                     decoration: BoxDecoration(
-                        color: Color(0xffECF6F6),
+                        color: const Color(0xffECF6F6),
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Color(0xffB5DDDD))),
-                    margin: EdgeInsets.only(top: 30),
-                    child: Text('Password',
+                        border: Border.all(color: const Color(0xffB5DDDD))),
+                    margin: const EdgeInsets.only(top: 30),
+                    child: const Text('Password',
                         style: TextStyle(fontSize: 22),
                         textAlign: TextAlign.center),
                   ),
                   Container(
                     width: 250,
                     height: 30,
-                    margin: EdgeInsets.only(top: 10),
+                    margin: const EdgeInsets.only(top: 10),
                     decoration: BoxDecoration(
-                      border: Border.all(width: 2, color: Color(0xffB5DDDD)),
+                      border:
+                          Border.all(width: 2, color: const Color(0xffB5DDDD)),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       obscureText: true,
                       decoration: InputDecoration(
                           border: InputBorder.none,
@@ -94,18 +96,18 @@ class login extends StatelessWidget {
           Container(
               width: 100,
               height: 50,
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
-                color: Color(0xffB5DDDB),
+                color: const Color(0xffB5DDDB),
               ),
               child: Center(
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => create_account()));
+                        builder: (context) => const create_account()));
                   },
-                  child: Text(
+                  child: const Text(
                     'Login',
                     style: TextStyle(
                         color: Colors.black,
@@ -114,16 +116,16 @@ class login extends StatelessWidget {
                   ),
                 ),
               )),
-          Text(
+          const Text(
             "계정이 없으신가요?",
             style: TextStyle(color: Colors.grey, fontSize: 15),
           ),
           TextButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => create_account()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const create_account()));
               },
-              child: Text("회원가입",
+              child: const Text("회원가입",
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                     color: Colors.black,

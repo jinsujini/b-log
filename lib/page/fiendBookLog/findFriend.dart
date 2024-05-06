@@ -1,24 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_application_blog/page/friendBoolLog.dart';
-
-import 'package:flutter_application_blog/page/friendBookLog.dart';
-
-class Friend {
-  final String name;
-  final String profileImageUrl;
-  final String introduction;
-
-  Friend({
-    required this.name,
-    required this.profileImageUrl,
-    required this.introduction,
-  });
-}
-
 class Friends extends StatefulWidget {
-  const Friends({Key? key}) : super(key: key);
+  const Friends({super.key});
 
   @override
   _FriendsState createState() => _FriendsState();
@@ -27,13 +10,8 @@ class Friends extends StatefulWidget {
 class _FriendsState extends State<Friends> {
   bool isSearchBarVisible = false;
 
-  List<Friend> friendsList = [
-    Friend(name: 'sbukkki', profileImageUrl: 'url_here', introduction: '자게 해줘'),
-    Friend(
-        name: 'seoyeon', profileImageUrl: 'url_here', introduction: '아님 나를 죽여'),
-    // 다른 친구들도 추가, db에서 받아올거
-  ];
-  List<Friend> filteredList = [];
+  List<String> list = ["sbukkki", "seoyeon"];
+  List<String> filteredList = [];
   var textcontroller = TextEditingController();
 
   void toggleSearchBarVisibility() {
@@ -46,18 +24,18 @@ class _FriendsState extends State<Friends> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xffFEFCEB),
+        color: const Color(0xffFEFCEB),
         width: double.infinity,
         height: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // 페이지 제목
+            // 페이지 제목..필요한가..?
             Container(
               width: double.infinity,
               height: 30,
-              margin: EdgeInsets.only(left: 35, top: 30),
-              child: Text(
+              margin: const EdgeInsets.only(left: 35, top: 130),
+              child: const Text(
                 "친구 게시물",
                 style: TextStyle(
                   fontSize: 15,
@@ -71,15 +49,23 @@ class _FriendsState extends State<Friends> {
                 children: [
                   // 친구 게시물..위치는 추후 수정
                   Positioned(
-                    top: 10,
+                    top: 20,
                     left: 30,
                     right: 30,
-                    bottom: 120,
-                    child: FriendBookLog(),
+                    bottom: 150,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromARGB(255, 26, 73, 93),
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
                   ),
                   // 하단 친구 검색바
                   AnimatedPositioned(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                     top: isSearchBarVisible ? 0 : 633,
                     left: 0,
@@ -90,49 +76,43 @@ class _FriendsState extends State<Friends> {
                         toggleSearchBarVisibility();
                       },
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color.fromRGBO(232, 242, 242, 1),
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                          ),
+                              topLeft: Radius.circular(15),
+                              topRight: Radius.circular(15)),
                         ),
                         child: Column(
                           children: [
                             Container(
-                              margin: EdgeInsets.only(top: 20),
+                              margin: const EdgeInsets.only(top: 20),
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Color.fromARGB(255, 26, 73, 93),
+                                  color: const Color.fromARGB(255, 26, 73, 93),
                                 ),
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: SearchBar(
                                 controller: textcontroller,
-                                constraints: BoxConstraints.expand(
-                                  width: 360,
-                                  height: 32,
-                                ),
-
+                                constraints: const BoxConstraints.expand(
+                                    width: 360, height: 32),
                                 elevation: WidgetStateProperty.all(0),
-
-                                elevation: MaterialStateProperty.all(0),
-
                                 hintText: '친구를 찾아보세요',
                                 onChanged: (value) {
+                                  print(value);
                                   setState(() {
-                                    filteredList = friendsList.where((friend) {
-                                      final name = friend.name.toLowerCase();
-                                      return name
-                                              .contains(value.toLowerCase()) &&
-                                          value.isNotEmpty;
-                                    }).toList();
+                                    filteredList = list
+                                        .where((element) =>
+                                            (element.toLowerCase().contains(
+                                                value.toLowerCase())) &&
+                                            (value.isNotEmpty))
+                                        .toList();
                                   });
+                                  print(filteredList.length);
                                 },
                                 trailing: [
                                   IconButton(
-                                    color: Color.fromARGB(255, 26, 73, 93),
                                     icon: const Icon(Icons.search_outlined),
                                     onPressed: () {
                                       print('친구찾기');
@@ -143,11 +123,10 @@ class _FriendsState extends State<Friends> {
                             ),
                             Container(
                               width: 400,
-                              margin: EdgeInsets.only(top: 18),
-                              child: Divider(
-                                color: Color.fromRGBO(26, 73, 93, 1),
-                                thickness: 1.0,
-                              ),
+                              margin: const EdgeInsets.only(top: 18),
+                              child: const Divider(
+                                  color: Color.fromRGBO(26, 73, 93, 1),
+                                  thickness: 1.0),
                             ),
                             Container(
                               child: filteredList.isEmpty &&
@@ -157,19 +136,13 @@ class _FriendsState extends State<Friends> {
                                       child: ListView.builder(
                                         itemCount: filteredList.length,
                                         itemBuilder: (context, index) {
-                                          final friend = filteredList[index];
                                           return ListTile(
-                                            leading: CircleAvatar(
-                                              backgroundImage: NetworkImage(
-                                                  friend.profileImageUrl),
-                                            ),
-                                            title: Text(friend.name),
-                                            subtitle: Text(friend.introduction),
+                                            title: Text(filteredList[index]),
                                           );
                                         },
                                       ),
                                     ),
-                            ),
+                            )
                           ],
                         ),
                       ),

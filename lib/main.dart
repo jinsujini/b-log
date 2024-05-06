@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_blog/page/appbar.dart';
-import 'package:flutter_application_blog/page/login.dart';
+import 'package:flutter_application_blog/index.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: login(),
-      ),
+    return const MaterialApp(
+      home: index(),
     );
   }
 }

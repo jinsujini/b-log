@@ -116,6 +116,9 @@ class create_account extends StatelessWidget {
                                 if (value == null || value.isEmpty) {
                                   return "문자를 입력하세요";
                                 }
+
+                                return null;
+
                               },
                               decoration: InputDecoration(
                                   border: InputBorder.none,
