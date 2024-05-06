@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_blog/page/MyBookLog.dart';
-import 'package:flutter_application_blog/page/mainPage.dart';
+import 'package:flutter_application_blog/page/findFriend.dart';
+import 'package:flutter_application_blog/page/friendpost.dart';
+//import 'package:flutter_application_blog/page/mainPage.dart';
+import 'package:flutter_application_blog/page/timerMain.dart';
 
 Color backColor = Color(0xFFFEFCEB);
 Color lineColor = Color(0xFF517E7E);
@@ -41,8 +44,8 @@ class _btnbState extends State<btnb> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: [
-          MainPage(),
-          ThirdPage(),
+          Friends(),
+          TimerMain(), // 타이머
           FourthPage(),
           MyBookLog(),
           FifththPage()
@@ -118,8 +121,8 @@ class _AppListPageState extends State<AppListPage> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: [
-          MainPage(),
-          ThirdPage(),
+          Friends(),
+          TimerMain(),
           FourthPage(),
           MyBookLog(),
           FifththPage()
