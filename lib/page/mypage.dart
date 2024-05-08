@@ -16,12 +16,8 @@ class MyPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 18.0),
                 child: SearchBar(
-                  side: WidgetStateProperty.all(
-                      BorderSide(color: Color(0xff517E7E), width: 1)),
-                  elevation: WidgetStatePropertyAll(0),
                   hintText: "검색어를 입력하세요",
                   trailing: [Icon(Icons.search)],
-                  backgroundColor: WidgetStatePropertyAll(Colors.white),
                   constraints: BoxConstraints(
                       maxWidth: 350, maxHeight: 50, minHeight: 40),
                 ),
@@ -154,10 +150,8 @@ class MyPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 18.0),
                         child: SearchBar(
-                          elevation: WidgetStatePropertyAll(0),
                           hintText: "이름으로 친구를 찾아보세요",
                           trailing: [Icon(Icons.search)],
-                          backgroundColor: WidgetStatePropertyAll(Colors.white),
                           constraints: BoxConstraints(
                               maxWidth: 300, maxHeight: 50, minHeight: 40),
                         ),

@@ -96,12 +96,8 @@ class _BooklogdetailsState extends State<Booklogdetails> {
               color: Colors.grey,
             ),
           ],
-          elevation: WidgetStatePropertyAll(0),
-          side:
-              WidgetStatePropertyAll(BorderSide(color: Colors.black, width: 1)),
           hintText: "검색어를 입력하세요",
           constraints: BoxConstraints(maxWidth: 360, maxHeight: 40),
-          backgroundColor: WidgetStatePropertyAll(Colors.white),
         ),
         SizedBox(
           height: 20,
