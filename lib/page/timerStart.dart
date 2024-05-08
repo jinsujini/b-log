@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'package:flutter_application_blog/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:flutter/material.dart';
 
 // 책 제목이 입력됐는지
@@ -34,29 +34,26 @@ void selectBookAlert(BuildContext context) {
   );
 }
 
-// 책 제목이 입력됐는지
-bool isBookSelected = false;
-// 선택된 책 제목
-String selectedBookTitle = '';
-// 책을 선택하면 실행되는 함수
-void selectBook(String title) {
-  selectedBookTitle = title;
-  isBookSelected = true;
-}
-
-// 책을 선택하지 않았을 때 나타나는 알림
-void selectBookAlert(BuildContext context) {
+/*
+void _showConfirmationDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("책 제목을 입력하세요"),
-        content: Text("시작하기 전에 책 제목을 입력해주세요."),
+        title: Text("이전 화면으로 돌아가시겠습니까?"),
+        content: Text("변경사항이 저장되지 않습니다."),
         actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("취소"),
+          ),
           TextButton(
             child: Text("확인"),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
+              Navigator.pop(context);
             },
           ),
         ],
@@ -64,13 +61,29 @@ void selectBookAlert(BuildContext context) {
     },
   );
 }
-
+*/
 class TimerStart extends StatelessWidget {
   const TimerStart({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Image.asset(
+          'assets/logo.png',
+          width: 100,
+          height: 100,
+        ),
+        backgroundColor: backColor,
+        centerTitle: true,
+        elevation: 0,
+        /*leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            _showConfirmationDialog(context);
+          },
+        ),*/
+      ),
       body: Container(
         color: Color(0xffFEFCEB),
         width: double.infinity,

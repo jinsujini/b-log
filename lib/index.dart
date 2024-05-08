@@ -44,7 +44,7 @@ class _btnbState extends State<btnb> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: [
-          const MainPage(),
+          const Friends(),
           TimerMain(),
           const MyBookLog(),
           const Friends(),
@@ -102,7 +102,7 @@ class AppListPage extends StatefulWidget {
 }
 
 class _AppListPageState extends State<AppListPage> {
-  int currentIndex = 0;
+  int currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,7 @@ class _AppListPageState extends State<AppListPage> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: [
-          const MainPage(),
+          const Friends(),
           TimerMain(),
           const MainPage(),
           const MyBookLog(),

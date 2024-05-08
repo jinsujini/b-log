@@ -38,6 +38,17 @@ class _TimerMainState extends State<TimerMain> {
                   // add 버튼
                   Container(
                     margin: EdgeInsets.only(right: 35),
+                    //버튼 그림자 넣는게 좋을지
+                    /*decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: Offset(1, 10), // changes position of shadow
+                        ),
+                      ],
+                    ),*/
                     child: GestureDetector(
                       onTap: () async {
                         // TimerStart 화면으로 이동하고 결과를 받아옴
@@ -64,29 +75,47 @@ class _TimerMainState extends State<TimerMain> {
               ),
             ),
             // 저장된 시간 표시
-            for (int i = 0; i < formattedTime.length; i++)
-              Container(
-                margin: EdgeInsets.only(top: i == 0 ? 50 : 20),
-                width: 350,
-                height: 70,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 26, 73, 93),
-                  ),
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Container(
-                  padding: EdgeInsets.only(top: 10, left: 15),
-                  child: Text(
-                    "${formattedTime[i]}",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ),
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    for (int i = 0; i < formattedTime.length; i++)
+                      Container(
+                        margin: EdgeInsets.only(top: 15),
+                        width: 350,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromARGB(255, 26, 73, 93),
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.only(top: 10, left: 15),
+                          child: Text(
+                            "${formattedTime[i]}",
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
+            ),
           ],
         ),
       ),
