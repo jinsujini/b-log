@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_blog/index.dart';
-import 'package:flutter_application_blog/page/myBookLog.dart';
+import 'package:flutter_application_blog/page/myBookLog/myBookLog.dart';
 
 class Writepage extends StatelessWidget {
   const Writepage({super.key});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_blog/page/MyBookLog.dart';
 import 'package:flutter_application_blog/page/findFriend.dart';
-import 'package:flutter_application_blog/page/friendpost.dart';
-//import 'package:flutter_application_blog/page/mainPage.dart';
+import 'package:flutter_application_blog/page/mainPage.dart';
+import 'package:flutter_application_blog/page/myBookLog.dart';
+import 'package:flutter_application_blog/page/mypage.dart';
 import 'package:flutter_application_blog/page/timerMain.dart';
 
-Color backColor = Color(0xFFFEFCEB);
-Color lineColor = Color(0xFF517E7E);
+Color backColor = const Color(0xFFFEFCEB);
+Color lineColor = const Color(0xFF517E7E);
 
 class logo extends StatelessWidget {
   const logo({super.key});
@@ -44,11 +44,10 @@ class _btnbState extends State<btnb> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: [
-          Friends(),
-          TimerMain(), // 타이머
-          FourthPage(),
-          MyBookLog(),
-          FifththPage()
+          const MainPage(),
+          TimerMain(),
+          const MyBookLog(),
+          const Friends(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -65,7 +64,7 @@ class _btnbState extends State<btnb> {
         showUnselectedLabels: false, // 선택되지 않은 항목 label 숨기기
         type: BottomNavigationBarType.fixed, // 선택시 아이콘 움직이지 않기
         backgroundColor: backColor,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.people, size: 40), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.timer, size: 40), label: ""),
@@ -79,7 +78,7 @@ class _btnbState extends State<btnb> {
 }
 
 class index extends StatefulWidget {
-  const index({Key? key}) : super(key: key);
+  const index({super.key});
 
   @override
   State<index> createState() => _indexState();
@@ -88,7 +87,7 @@ class index extends StatefulWidget {
 class _indexState extends State<index> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AppListPage(),
     );
@@ -96,7 +95,7 @@ class _indexState extends State<index> {
 }
 
 class AppListPage extends StatefulWidget {
-  const AppListPage({Key? key}) : super(key: key);
+  const AppListPage({super.key});
 
   @override
   State<AppListPage> createState() => _AppListPageState();
@@ -121,11 +120,11 @@ class _AppListPageState extends State<AppListPage> {
       body: IndexedStack(
         index: currentIndex, // index 순서에 해당하는 child를 맨 위에 보여줌
         children: [
-          Friends(),
+          const MainPage(),
           TimerMain(),
-          FourthPage(),
-          MyBookLog(),
-          FifththPage()
+          const MainPage(),
+          const MyBookLog(),
+          const MyPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -142,7 +141,7 @@ class _AppListPageState extends State<AppListPage> {
         showUnselectedLabels: false, // 선택되지 않은 항목 label 숨기기
         type: BottomNavigationBarType.fixed, // 선택시 아이콘 움직이지 않기
         backgroundColor: backColor,
-        items: [
+        items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.people, size: 40), label: ""),
           BottomNavigationBarItem(icon: Icon(Icons.timer, size: 40), label: ""),
@@ -157,39 +156,39 @@ class _AppListPageState extends State<AppListPage> {
 
 /// 세 번째 페이지
 class ThirdPage extends StatelessWidget {
-  const ThirdPage({Key? key}) : super(key: key);
+  const ThirdPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backColor,
-      body: Center(),
+      body: const Center(),
     );
   }
 }
 
 /// 네 번째 페이지
 class FourthPage extends StatelessWidget {
-  const FourthPage({Key? key}) : super(key: key);
+  const FourthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backColor,
-      body: Center(),
+      body: const Center(),
     );
   }
 }
 
 /// 다섯 번째 페이지
 class FifththPage extends StatelessWidget {
-  const FifththPage({Key? key}) : super(key: key);
+  const FifththPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backColor,
-      body: Center(),
+      body: const Center(),
     );
   }
 }
