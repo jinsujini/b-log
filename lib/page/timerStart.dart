@@ -3,16 +3,6 @@ import 'package:flutter_application_blog/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
-// 책 제목이 입력됐는지
-bool isBookSelected = false;
-// 선택된 책 제목
-String selectedBookTitle = '';
-// 책을 선택하면 실행되는 함수
-void selectBook(String title) {
-  selectedBookTitle = title;
-  isBookSelected = true;
-}
-
 // 책을 선택하지 않았을 때 나타나는 알림
 void selectBookAlert(BuildContext context) {
   showDialog(
@@ -119,27 +109,6 @@ class TimerStart extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  // 책 제목 입력
-                  Container(
-                    width: 310,
-                    height: 30,
-                    margin: EdgeInsets.only(top: 40),
-                    child: TextField(
-                      textAlign: TextAlign.center, // 텍스트 정렬을 가운데로 설정합니다.
-                      onSubmitted: (value) {
-                        FocusScope.of(context).requestFocus(FocusNode());
-                        selectBook(value);
-                      },
-                      onChanged: (value) {
-                        selectedBookTitle = value;
-                        isBookSelected = true;
-                      },
-                      decoration: InputDecoration(
-                        hintText: '책 제목을 입력하세요',
-                        border: InputBorder.none, // 밑줄 제거
-                      ),
-                    ),
-                  ),
                   SizedBox(height: 20), // 위젯 사이 여백
                   // 스톱워치
                   TimerScreen(),
@@ -162,6 +131,23 @@ class TimerScreen extends StatefulWidget {
 }
 
 class _TimerScreenState extends State<TimerScreen> {
+// 책 제목이 입력됐는지
+  bool isBookSelected = false;
+// 선택된 책 제목
+  String selectedBookTitle = '';
+// 책을 선택하면 실행되는 함수
+  void selectBook(String title) {
+    selectedBookTitle = title;
+    isBookSelected = true;
+  }
+
+  String bookmarks = '';
+  bool isBookmarks = false;
+  void writeBookmarks(String page) {
+    bookmarks = page;
+    isBookmarks = true;
+  }
+
   late Timer timer;
   int seconds = 0;
   int minutes = 0;
@@ -178,6 +164,27 @@ class _TimerScreenState extends State<TimerScreen> {
         '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
     return Column(
       children: [
+        // 책 제목 입력
+        Container(
+          width: 310,
+          height: 30,
+          margin: EdgeInsets.only(top: 40),
+          child: TextField(
+            textAlign: TextAlign.center, // 텍스트 정렬을 가운데로 설정합니다.
+            onSubmitted: (value) {
+              FocusScope.of(context).requestFocus(FocusNode());
+              selectBook(value);
+            },
+            onChanged: (value) {
+              selectedBookTitle = value;
+              isBookSelected = true;
+            },
+            decoration: InputDecoration(
+              hintText: '책 제목을 입력하세요',
+              border: InputBorder.none, // 밑줄 제거
+            ),
+          ),
+        ),
         // 타이머
         Text(
           formattedTime,
@@ -186,9 +193,30 @@ class _TimerScreenState extends State<TimerScreen> {
             fontWeight: FontWeight.w100,
           ),
         ),
+        // 북마크 입력
+        Container(
+          width: 310,
+          height: 30,
+          margin: EdgeInsets.only(top: 10),
+          child: TextField(
+            textAlign: TextAlign.center, // 텍스트 정렬을 가운데로 설정합니다.
+            onSubmitted: (value) {
+              FocusScope.of(context).requestFocus(FocusNode());
+              writeBookmarks(value);
+            },
+            onChanged: (value) {
+              bookmarks = value;
+              isBookmarks = true;
+            },
+            decoration: InputDecoration(
+              hintText: '북마크',
+              border: InputBorder.none, // 밑줄 제거
+            ),
+          ),
+        ),
         // 버튼(start-stop-save/restart)
         Container(
-          margin: EdgeInsets.only(top: 40),
+          margin: EdgeInsets.only(top: 20),
           child: Row(
             // 버튼 가로 정렬
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -251,11 +279,15 @@ class _TimerScreenState extends State<TimerScreen> {
                     //타이머 시간 저장
                     final SharedPreferences prefs =
                         await SharedPreferences.getInstance();
+                    // 저장 버튼을 눌렀을 때 시간, 책 제목, 북마크 저장
                     await prefs.setString('savedTime', formattedTime);
+                    await prefs.setString('bookTitle', selectedBookTitle);
+                    await prefs.setString('bookmarks', bookmarks);
                     //이전 화면으로 돌아가기
                     Navigator.pop(context, {
                       'time': formattedTime,
                       'bookTitle': selectedBookTitle,
+                      'bookmarks': bookmarks,
                     });
                   },
                   style: ElevatedButton.styleFrom(

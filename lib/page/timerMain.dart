@@ -7,7 +7,7 @@ class TimerMain extends StatefulWidget {
 }
 
 class _TimerMainState extends State<TimerMain> {
-  List<String?> formattedTime = [];
+  List<String?> timeInfo = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _TimerMainState extends State<TimerMain> {
             Container(
               width: double.infinity,
               height: 30,
-              margin: EdgeInsets.only(left: 35, top: 30),
+              margin: EdgeInsets.only(left: 35, top: 30, bottom: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -59,8 +59,9 @@ class _TimerMainState extends State<TimerMain> {
                         // TimerStart 화면에서 반환된 값으로 formattedTimes에 추가
                         setState(() {
                           if (result != null) {
-                            formattedTime.add(result['time']);
-                            selectedBookTitle = result['bookTitle'];
+                            timeInfo.add(result['time']);
+                            timeInfo.add(result['bookTitle']);
+                            timeInfo.add(result['bookmarks']);
                           }
                         });
                       },
@@ -74,13 +75,13 @@ class _TimerMainState extends State<TimerMain> {
                 ],
               ),
             ),
+
             // 저장된 시간 표시
-            Container(
-              margin: EdgeInsets.only(top: 50),
+            Expanded(
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    for (int i = 0; i < formattedTime.length; i++)
+                    for (int i = 0; i < timeInfo.length; i++)
                       Container(
                         margin: EdgeInsets.only(top: 15),
                         width: 350,
@@ -101,15 +102,30 @@ class _TimerMainState extends State<TimerMain> {
                             ),
                           ],
                         ),
-                        child: Container(
-                          padding: EdgeInsets.only(top: 10, left: 15),
-                          child: Text(
-                            "${formattedTime[i]}",
-                            style: TextStyle(
-                              fontSize: 40,
-                              fontWeight: FontWeight.w200,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 10, left: 15),
+                              child: Text(
+                                "${timeInfo[i]}",
+                                style: TextStyle(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w100,
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              padding: EdgeInsets.only(top: 10, right: 15),
+                              child: Text(
+                                "${timeInfo[++i]}/${timeInfo[++i]}",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w100,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                   ],
