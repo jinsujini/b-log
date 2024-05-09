@@ -22,17 +22,6 @@ class appbar extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      drawer: Drawer(
-          backgroundColor: Colors.white,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(30),
-                child: Text("끝나버렸다. 난 시작도 안해봤는데."),
-              ),
-            ],
-          )),
     );
   }
 }
