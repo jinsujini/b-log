@@ -1,8 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class MyPage extends StatelessWidget {
-  const MyPage({super.key});
+class FriendPage extends StatelessWidget {
+  final String name;
+  final String profileImageUrl;
+  final String introduction;
+
+  const FriendPage({
+    required this.name,
+    required this.profileImageUrl,
+    required this.introduction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,26 +40,31 @@ class MyPage extends StatelessWidget {
                 width: double.infinity,
                 height: 190,
                 margin:
-                    EdgeInsets.only(top: 40, right: 20, left: 20, bottom: 20),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 30),
-                      child: Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(100.0),
-                            child: Image.asset(
-                              'annonymous.jpeg',
-                              width: 100,
-                              height: 100,
-                            ),
-                          ),
-                          Container(child: Text("s0obang")),
-                        ],
+                    EdgeInsets.only(top: 40, right: 20, left: 30, bottom: 20),
+                child: Row(children: [
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 21, left: 20),
+                        child: CircleAvatar(
+                          radius: 50,
+                          backgroundImage: NetworkImage(profileImageUrl),
+                        ),
                       ),
-                    ),
-                    Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 20, left: 28),
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
                       Container(
                         width: 80,
                         height: 20,
@@ -59,26 +73,22 @@ class MyPage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(15),
                           color: const Color(0xffB5DDDD),
                         ),
-                        margin: EdgeInsets.only(top: 50, left: 10),
+                        margin: EdgeInsets.only(top: 50, left: 20),
                         child: Text(
                           "한줄소개",
                           style: TextStyle(fontSize: 12),
                         ),
                       ),
                       Container(
-                        child: Text("한 달에 한 권씩"),
-                        margin: EdgeInsets.only(top: 20, left: 20),
-                      ),
-                    ]),
-                    Container(
-                      margin: EdgeInsets.only(top: 80, left: 50),
-                      child: Icon(
-                        Icons.edit,
-                        color: Color(0xffA0A0A0),
-                      ),
-                    )
-                  ],
-                ),
+                        margin: EdgeInsets.only(top: 30, left: 20),
+                        child: Text(
+                          introduction,
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      )
+                    ],
+                  )
+                ]),
 
                 //사진, 아이디, 한마디
               ),
@@ -141,65 +151,6 @@ class MyPage extends StatelessWidget {
                       ),
                     ],
                   )),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      border: Border.all(color: Color(0xff517E7E), width: 1)),
-                  width: double.infinity,
-                  height: 200,
-                  margin: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child: SearchBar(
-                          hintText: "이름으로 친구를 찾아보세요",
-                          trailing: [Icon(Icons.search)],
-                          constraints: BoxConstraints(
-                              maxWidth: 300, maxHeight: 50, minHeight: 40),
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, left: 10),
-                                child: Image.asset(
-                                  'assets/images/anonymous.jpg',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                              ),
-                              Container(child: Text("s0obang")),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, left: 10),
-                                child: Image.asset(
-                                  'assets/images/anonymous.jpg',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  "jinsujini",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  )
-                  //사진, 아이디, 한마디
-                  ),
             ],
           ),
         ),

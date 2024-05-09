@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class MyPage extends StatelessWidget {
-  const MyPage({super.key});
+  const MyPage({Key? key}) : super(key: key);
+  get child => null;
 
   @override
   Widget build(BuildContext context) {
@@ -141,65 +142,6 @@ class MyPage extends StatelessWidget {
                       ),
                     ],
                   )),
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      border: Border.all(color: Color(0xff517E7E), width: 1)),
-                  width: double.infinity,
-                  height: 200,
-                  margin: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child: SearchBar(
-                          hintText: "이름으로 친구를 찾아보세요",
-                          trailing: [Icon(Icons.search)],
-                          constraints: BoxConstraints(
-                              maxWidth: 300, maxHeight: 50, minHeight: 40),
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, left: 10),
-                                child: Image.asset(
-                                  'assets/images/anonymous.jpg',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                              ),
-                              Container(child: Text("s0obang")),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, left: 10),
-                                child: Image.asset(
-                                  'assets/images/anonymous.jpg',
-                                  width: 50,
-                                  height: 50,
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  "jinsujini",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  )
-                  //사진, 아이디, 한마디
-                  ),
             ],
           ),
         ),
