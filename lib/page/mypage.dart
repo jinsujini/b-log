@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class MyPage extends StatelessWidget {
   const MyPage({super.key});
@@ -34,13 +35,16 @@ class MyPage extends StatelessWidget {
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 5),
+                      padding: const EdgeInsets.only(top: 30, left: 30),
                       child: Column(
                         children: [
-                          Image.asset(
-                            'assets/images/anonymous.jpg',
-                            width: 120,
-                            height: 120,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(100.0),
+                            child: Image.asset(
+                              'annonymous.jpeg',
+                              width: 100,
+                              height: 100,
+                            ),
                           ),
                           Container(child: Text("s0obang")),
                         ],
