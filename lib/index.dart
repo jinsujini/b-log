@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_blog/page/findFriend.dart';
 import 'package:flutter_application_blog/page/mainPage.dart';
 import 'package:flutter_application_blog/page/myBookLog.dart';
-import 'package:flutter_application_blog/page/mypage.dart';
+import 'package:flutter_application_blog/page/mpfindFriend.dart';
 import 'package:flutter_application_blog/page/timerMain.dart';
 
 Color backColor = const Color(0xFFFEFCEB);
@@ -124,7 +124,7 @@ class _AppListPageState extends State<AppListPage> {
           TimerMain(),
           const MainPage(),
           const MyBookLog(),
-          const MyPage(),
+          const MpFriends(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

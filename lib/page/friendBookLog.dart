@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_blog/index.dart';
-import 'package:flutter_application_blog/page/writePage.dart';
+//import 'package:flutter_application_blog/page/writePage.dart';
 
 class ProfileWidget extends StatelessWidget {
   @override
