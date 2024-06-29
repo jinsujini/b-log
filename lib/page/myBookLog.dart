@@ -14,10 +14,15 @@ class MyContainer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              child: const Row(
+              child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Icon(Icons.edit, color: Colors.grey),
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const Writepage()));
+                  },
+                  icon: Icon(Icons.edit, color: Colors.grey)),
               Icon(Icons.delete, color: Colors.grey),
             ],
           )),

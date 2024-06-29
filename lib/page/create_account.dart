@@ -49,8 +49,34 @@ String? validateNickName(String? value) {
   }
 }
 
-class create_account extends StatelessWidget {
+class create_account extends StatefulWidget {
   const create_account({Key? key}) : super(key: key);
+
+  @override
+  _create_accountState createState() => _create_accountState();
+}
+
+class _create_accountState extends State<create_account> {
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return '\n \n비밀번호를 확인하세요';
+    } else if (value != _passwordController.text) {
+      return '\n\n비밀번호가 일치하지 않습니다.';
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +108,7 @@ class create_account extends StatelessWidget {
               ),
               Container(
                 width: 330,
-                height: 530,
+                height: 550,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
@@ -165,6 +191,7 @@ class create_account extends StatelessWidget {
                                 width: 260,
                                 height: 65,
                                 child: TextFormField(
+                                    controller: _passwordController,
                                     validator: validatePassword,
                                     obscureText: true,
                                     decoration: InputDecoration(
@@ -178,6 +205,18 @@ class create_account extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Container(
+                            width: 180,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: Color(0xffECF6F6),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Color(0xffB5DDDD))),
+                            margin: EdgeInsets.only(top: 10),
+                            child: Text('Password check',
+                                style: TextStyle(fontSize: 20),
+                                textAlign: TextAlign.center),
+                          ),
                           Stack(
                             children: [
                               Container(
@@ -194,7 +233,8 @@ class create_account extends StatelessWidget {
                                 width: 260,
                                 height: 65,
                                 child: TextFormField(
-                                    validator: validatePassword,
+                                    controller: _confirmPasswordController,
+                                    validator: validateConfirmPassword,
                                     obscureText: true,
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
@@ -224,7 +264,7 @@ class create_account extends StatelessWidget {
                               Container(
                                 width: 260,
                                 height: 30,
-                                margin: EdgeInsets.only(top: 10),
+                                margin: EdgeInsets.only(top: 5),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 2, color: Color(0xffB5DDDD)),
@@ -265,7 +305,7 @@ class create_account extends StatelessWidget {
                               Container(
                                 width: 260,
                                 height: 30,
-                                margin: EdgeInsets.only(top: 10),
+                                margin: EdgeInsets.only(top: 5),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                       width: 2, color: Color(0xffB5DDDD)),
